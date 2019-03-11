@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Template 制作模版</title>
+</head>
+<body>
+	<h1>Template 制作模版  <small>3种方式</small></h1>
+	<hr>
+	<div id="app">
+
+	</div>
+
+	<template id="app2">
+		<p style="color:red;fontSize:22px;">写在template标签里的模板</p>
+	</template>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : "#app",
+			data : {
+				message : "直接写在选项里的模板"
+			},
+			template : `<p>{{message}}</p>`
+		})
+
+		var app2 = new Vue({
+			el : "#app2",
+			template : "#app2"
+		})
+
+
+	</script>
+</body>
+</html>

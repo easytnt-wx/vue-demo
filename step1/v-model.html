@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-model</title>
+</head>
+<body>
+	<div id="app">
+		v-model:<input type="text" name="" id="" v-model="username">
+		v-model.lazy:<input type="text" name="" id="" v-model.lazy="username">
+		v-model.number:<input type="text" name="" id="" v-model.number="username">
+		v-model.trim:<input type="text" name="" id="" v-model.trim="username">
+		<input type="password" name="" id="" v-model="passwd">
+		<p>user:{{username}} password:{{passwd}}</p>
+		<hr>
+
+		<textarea v-model="info" name="" id="" cols="30" rows="10"></textarea>
+		<p>{{info}}</p>
+		<br>
+		<hr>
+		<h3>多选按钮绑定一个值</h3>
+		<input type="checkbox" name="" id="a1" v-model='isTrue'>
+		<label for="a1">{{isTrue}}</label>
+
+		<hr>
+		<h3>多选按钮绑定多个值</h3>
+		<input type="checkbox" value="jspang" id="jspang" v-model="webter_name"><label for="jspang">jspang</label>
+		<input type="checkbox" value="wangx" id="wangx" v-model="webter_name"><label for="wangx">wangx</label>
+		<input type="checkbox" value="ruanyf" id="ruanyf" v-model="webter_name"><label for="ruanyf">ruanyf</label>
+		<p>{{webter_name}}</p>
+		
+		<hr>
+		<h3>单选绑定</h3>
+		<input type="radio" name="man" id="man" value="man" v-model="sex"><label for="man">man</label>
+		<input type="radio" name="women" id="women" value="women" v-model="sex"><label for="women">women</label>
+		<p>{{sex}}</p>
+	</div>
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : "#app",
+			data : {
+				username: '',
+				passwd: '',
+				info: "Are you ok? hello~ think~ think verymuch~",
+				isTrue : true,
+				webter_name : [],
+				sex: ''
+			}
+		})
+	</script>
+</body>
+</html>

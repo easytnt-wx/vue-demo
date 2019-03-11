@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue的生命周期(钩子函数)</title>
+</head>
+<body>
+	<div id="app">
+		<h1>Vue的生命周期(钩子函数)   10个阶段</h1>
+		<ol>
+			<li>
+				<p>beforeCreate 在实例初始化之后,事件配置之前被调用。</p>
+			</li>
+			<li>
+				<p>created 在实例创建完成后被立即调用。实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。</p>
+			</li>
+			<li>
+				<p>beforeMount 在挂载开始之前被调用</p>
+			</li>
+			<li>
+				<p>mounted 挂载后被调用</p>
+			</li>
+			<li>
+				<p>beforeUpdate 数据更新时调用</p>
+			</li>
+			<li>
+				<p>updated 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子</p>
+			</li>
+			<li>
+				<p>activated 组件激活时调用</p>
+			</li>
+			<li>
+				<p>deactivated 组件停用时调用</p>
+			</li>
+			<li>
+				<p>beforeDestroy 实例销毁之前调用</p>
+			</li>
+			<li>
+				<p>destroyed 例销毁后调用</p>
+			</li>
+		</ol>
+		<hr>
+		<p>得分：{{count}}</p>
+		<button v-on:click="add">加分</button><button v-on:click="del">减分</button>
+	</div>
+	<button onclick="app.$destroy()">销毁Vue实例</button>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : "#app",
+			data : {
+				count : 10
+			},
+			methods : {
+				add : function(){
+					this.count++;
+				},
+				del : function(){
+					this.count--;
+				}
+			},
+			beforeCreate : function(){
+				console.log("1----beforeCreate");
+			},
+			created : function(){
+				console.log("2----created")
+			},
+			beforeMount : function(){
+				console.log("3----beforeMount")
+			},
+			mounted : function(){
+				console.log("4-----mounted")
+			},
+			beforeUpdate : function(){
+				console.log("5-----beforeUpdate")
+			},
+			updated : function(){
+				console.log("6-----updated")
+			},
+			activated : function(){
+				console.log("7-----activated")
+			},
+			deactivated : function(){
+				console.log("8------deactivated")
+			},
+			beforeDestroy : function(){
+				console.log("9------beforeDestory")
+			},
+			destroyed : function(){
+				console.log("10------destoryed")
+			}
+		})
+	</script>
+</body>
+</html>

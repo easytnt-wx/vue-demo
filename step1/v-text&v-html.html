@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>v-text v-html</title>
+</head>
+<body>
+	<div id="app">
+		<p>使用v-text是为了防止页面错误加载出现 “{{error}}”的尴尬局面，使用v-html的时候在生产环境中动态渲染HTML是非常危险的，因为容易导致XSS攻击。所以只能在可信的内容上使用v-html，永远不要在用户提交和可操作的网页上使用</p>
+		<p v-text="message"></p>
+		<div v-html="message2"></div>
+
+
+	</div>
+	<script src="../js/vue.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : "#app",
+			data : {
+				message : "hello vue!",
+				message2 : "<h1>hello vue!!!</h1>"
+			}
+		})
+	</script>
+</body>
+</html>

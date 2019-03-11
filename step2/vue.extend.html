@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.extend构造器的延伸</title>
+</head>
+<body>
+	<div id="app">
+		<h1>Vue.extend构造器的延伸</h1>
+		<p>vue.extend作用可自定义标签(wangx),或者指定标签（class，id，）。必须先声明一个vue.extend的对象，再new然后挂载  new wangx().$mount('#aaa')</p>
+		<hr>
+		<xidada></xidada>
+	</div>
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var wangx = Vue.extend({
+			template : "<p class='fc'  v-bind:style='styObj'>{{message}}</p>",
+			data : function(){
+				return {
+					fc : "f333",
+					message : "vue.extend实例构造器用于组件开发",
+					styObj : {
+						color : "#ff9800",
+						fontSize : "22px",
+						padding : "20px"
+					}
+				}
+			}
+		});
+
+		new wangx().$mount('xidada');
+	</script>
+</body>
+</html>

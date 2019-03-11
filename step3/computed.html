@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>computed 计算选项</title>
+</head>
+<body>
+	<h1>computed 计算选项</h1>
+	<p>computed 的作用主要是对原数据进行改造输出。改造输出：包括格式的编辑，大小写转换，顺序重排，添加符号……。</p>
+	<hr>
+	
+	<div id="app">
+		<p>原值是 100</p>
+		<p>通过格式化 computed选项后 -----{{newPrice}}</p>
+		<hr>
+		<ul>
+			<li>
+				<h2>布克37+8+11太阳爆冷擒勇士 库里18+7+8阿杜伤退 <small>16小时前</small></h2>
+			</li>
+			<li>
+				<h2>杜兰特砍25分惨遭小将钉板血帽 扭伤脚踝提前退场 <small>6小时前</small></h2>
+			</li>
+			<li>
+				<h2>火箭1分险胜独行侠8连胜 哈登20分东契奇19+15+9 <small>16小时前</small></h2>
+			</li>
+			<li>
+				<h2>哈登20+5+4末节狂铁8中0 连续40场25+纪录中断 <small>1小时前</small></h2>
+			</li>
+		</ul>
+		<p>通过格式化 computed选项后的 新闻列表</p>
+		<ul>
+			<li v-for="item in news">
+				<h2>{{item.title}}  <small>{{item.date}}</small></h2>
+			</li>
+		</ul>
+
+	</div>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var newLists = [
+			{title:'布克37+8+11太阳爆冷擒勇士 库里18+7+8阿杜伤退',date:'16小时前'},
+			{title:'杜兰特砍25分惨遭小将钉板血帽 扭伤脚踝提前退场',date:'6小时前'},
+			{title:'火箭1分险胜独行侠8连胜 哈登20分东契奇19+15+9',date:'16小时前'},
+			{title:'哈登20+5+4末节狂铁8中0 连续40场25+纪录中断',date:'1小时前'}
+		];
+
+
+		var app = new Vue({
+			el : '#app',
+			data : {
+				price : 100,
+				newlist : newLists
+			},
+			computed : {
+				newPrice : function(){
+					return this.price = '￥' + this.price + '元'
+				},
+				news : function(){
+					return this.newlist.reverse();
+				}
+			}
+		})
+	</script>
+</body>
+</html>

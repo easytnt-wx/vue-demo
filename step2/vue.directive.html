@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue.directive自定义指令</title>
+</head>
+<body>
+	<div id="app">
+		<h4>得分 : {{count}}</h4>
+		<button type="button" v-on:click="add1">点击加分</button>
+		<p v-wangx="fc">{{count}}</p>
+		<button onclick="unbind()">解绑</button>
+		
+	</div>
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script type="text/javascript">
+		function unbind(){
+			app.$destroy();
+		};
+
+		Vue.directive('wangx',{
+			bind : function(el,binding,vnode){
+				console.log("1----bind");
+				el.style = "color:" + binding.value;
+			},
+			inserted : function(){
+				console.log("2----inserted");
+			},
+			update : function(){
+				console.log("3----update");
+			},
+			componentUpdated : function(){
+				console.log("4----componentUpdated");
+			},
+			unbind : function(){
+				console.log("5----unbind");
+			}
+		});
+
+
+
+
+
+		var app = new Vue({
+			el : "#app",
+			data : {
+				count : 1,
+				fc : 'red'
+			},
+			methods : {
+				add1 : function(){
+					this.count++;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

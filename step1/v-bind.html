@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-bind</title>
+	<style type="text/css">
+		.f_28{
+			font-size: 28px;
+		}
+		.c_red{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<img v-bind:src="url_a" alt="">
+		<a v-bind:href="href_a">百度</a>
+		<p v-bind:class="f28">直接绑定class样式</p>
+		<p v-bind:class="[f28,cred]">数组绑定class样式</p>
+		<p v-bind:class='{c_red:isOk}'>通过判断来绑定css</p>
+		<p v-bind:class="isOk?cred:f28">通过三元表达式判断加载class样式</p>
+		<p v-bind:style="{color:c333}">绑定style</p>
+		<p v-bind:style="styleobj">绑定style</p>
+	</div>
+
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el : '#app',
+			data : {
+				url_a : "http://192.168.1.252/public/static/easy_exam/images/404-1.png",
+				href_a : "https://www.baidu.com/",
+				f28 : 'f_28',
+				cred : 'c_red',
+				isOk : true,
+				c333 : '#333',
+				styleobj : {
+					color : '#ccc',
+					fontSize : '72px',
+					padding : '12px'
+				}
+			}
+		})
+	</script>
+</body>
+</html>

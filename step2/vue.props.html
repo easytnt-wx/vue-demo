@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Component 组件props 属性设置</title>
+</head>
+<body>
+	<h1>Component 组件props 属性设置</h1>
+	<p>props选项就是设置和获取标签上的属性值的</p>
+	<div id="app">
+		<wx here='changsha'></wx>
+	</div>
+
+	<hr>
+
+	<div id="app2">
+		<h2>属性中带’-‘的处理方式,我们在写属性时经常会加入’-‘来进行分词,我们必须用小驼峰式写法</h2>
+		<wangx from-here="hunan changsha"></wangx>
+	</div>
+	
+	<hr>
+
+	<div id="app3">
+		<h2>在构造器里向组件中传值</h2>
+		<wangxiang v-bind:msg="messages"></wangxiang>
+	</div>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var wx = {
+			template : `<p>我是局部组件,我来自{{here}}</p>`,
+			//定义属性 here ,在自定义标签上设置属性 here='xxx' xxx设置成什么就获取到什么属性值
+			props : ['here']
+		}
+		var app = new Vue({
+			el : "#app",
+			data : {
+				messages : "Props属性设置"
+			},
+			components : {
+				'wx' : wx
+			}
+		});
+
+		var wangx = {
+			template : `<p>大家好，很高兴认识你,我来自{{fromHere}}</p>`,
+			//处理属性 from-here属性
+			props : ['fromHere']
+		};
+
+		var app2 = new Vue({
+			el : "#app2",
+			data : {
+
+			},
+			components : {
+				'wangx' : wangx
+			}
+		});
+
+		//在构造器里向组件中传值
+		//通过v-bind:xxx="data"  data的值是构造器的data里面的值  messsages
+		var wangxiang = {
+			template : `<p>构造器里向组件中传值---{{msg}}</p>`,
+			props : ['msg']
+		};
+
+		var app3 = new Vue({
+			el : '#app3',
+			data : {
+				messages : "我就是构造器data的值"
+			},
+			components : {
+				'wangxiang' : wangxiang
+			}
+		})
+
+
+	</script>
+</body>
+</html>

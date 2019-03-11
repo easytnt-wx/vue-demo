@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>propsData Option 全局扩展的数据传递</title>
+</head>
+<body>
+	<h1>propsData Option 全局扩展的数据传递</h1>
+	<p>propsData在实际开发中我们使用的并不多，我们在后边会学到Vuex的应用，他的作用就是在单页应用中保持状态和数据的.</p>
+	<hr>
+	<header></header>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var header_a = Vue.extend({
+			template : `<p>hello world!{{messages}}----{{aaa}}</p>`,
+			data : function(){
+				return {
+					messages : 'hello Vue!'
+				}
+			},
+			props : ['aaa']
+		});
+
+		new header_a({propsData:{'aaa':'我是传进扩展的数据！'}}).$mount('header');
+	</script>
+</body>
+</html>

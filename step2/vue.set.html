@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue.set全局操作</title>
+</head>
+<body>
+	<div id="app">
+		<h1>Vue.set全局操作</h1>
+		<p>Vue.set 的作用就是在构造器外部操作构造器内部的数据、属性或者方法。</p>
+		<hr>
+		<p>由于Javascript的限制，Vue不能自动检测以下变动的数组。</p>
+		<p>1. 当你利用索引直接设置一个项时，vue不会为我们自动更新。</p>
+		<p>2. 当你修改数组的长度时，vue不会为我们自动更新。</p>
+		<p>这时我们的界面是不会自动跟新数组的，我们需要用Vue.set(app.arr,1,’ddd’)来设置改变，vue才会给我们自动更新，这就是Vue.set存在的意义。</p>
+		<hr>
+		<ol>
+			<li v-for="item in items">
+				<p>{{item.username}}</p>
+			</li>
+		</ol>
+		<button onclick="addPerson()">增加兵种</button>
+	</div>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var outData = [
+			{username : '步兵'},
+			{username : '狙击手'},
+			{username : '炮兵'},
+			{username : '伞兵'},
+			{username : '工兵'}
+		];
+
+		var app = new Vue({
+			el : "#app",
+			data : {
+				items : outData
+			}
+		});
+
+		function addPerson(){
+			//outData[5] = {username:"飞行兵"};
+			Vue.set(outData,5,{username: "飞行兵"})
+			//app.items[5] = {username: "飞行兵"};
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Component 初识组件</title>
+</head>
+<body>
+	<div id="app">
+		<h1>Component 初识组件</h1>
+		<p>组件就是制作自定义的标签</p>
+		<hr>
+		<p>全局注册组件可以在多个构造器作用域使用  例如  #app   #app2作用域使用</p>
+		<wangxiang></wangxiang>
+	</div>
+
+	<div id="app2">
+		<wangxiang></wangxiang>
+	</div>
+	<hr>
+	<p>局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。</p>
+	<div id="app3">
+		<wx></wx>
+	</div>
+
+	<script src="../js/vue.js"></script>
+	<script type="text/javascript">
+		//全局化注册组件
+		//全局注册组件可以在多个构造器作用域使用  例如  #app   #app2作用域使用
+		Vue.component('wangxiang',{
+			template : `<p>hi~ welcome to my home~</p>`
+		});
+
+		var app = new Vue({
+			el : '#app',
+			data : {
+
+			}
+		});
+
+		var app2 = new Vue({
+			el : '#app2',
+			data : {
+
+			}
+		});
+
+		//局部注册组件
+		//局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。
+		var app3 = new Vue({
+			el : "#app3",
+			data : {
+				messages : "局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。"
+			},
+			components : {
+				'wx' : {
+					template : `<p>局部注册实例</p>`
+				}
+			}
+		})
+
+
+
+	</script>
+</body>
+</html>
