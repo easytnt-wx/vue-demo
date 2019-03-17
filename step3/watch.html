@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Watch 选项 监控数据</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Watch 选项 监控数据</h1>
+        <hr>
+
+        <p>今日温度：{{wd}} ℃</p>
+        <p>穿衣指数：{{yf}}</p>
+        <button v-on:click="addwd(5)">升温</button><button v-on:click="delwd(2)">降温</button>
+    </div>
+    <hr>
+    <div id="app2">
+        <h2>用实例属性写watch监控</h2>
+        <p>有些时候我们会用实例属性的形式来写watch监控。也就是把我们watch卸载构造器的外部，这样的好处就是降低我们程序的耦合度，使程序变的灵活。</p>
+        <hr>
+        <p>今日温度：{{wd}} ℃</p>
+        <p>穿衣指数：{{yf}}</p>
+        <button v-on:click="addwd(5)">升温</button><button v-on:click="delwd(2)">降温</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script type="text/javascript">
+        var yfArray = ['短袖','卫衣','羽绒服'];
+        var app = new Vue({
+            el : "#app",
+            data : {
+                'wd' : 22,
+                'yf' : "短袖"
+            },
+            methods : {
+                addwd : function(num){
+                    if(num != ''){
+                        this.wd+=num;
+                    }else{
+                        this.wd++;
+                    }
+                },
+                delwd : function(num){
+                    if(num != ''){
+                        this.wd-=num;
+                    }else{
+                        this.wd--;
+                    }
+                }
+            },
+            watch : {
+                'wd' : function(newVal,oldVal){
+                    if( newVal > 22 ){
+                        this.yf = yfArray[0];
+                    }else if ( newVal < 22 && newVal > 8 ){
+                        this.yf = yfArray[1];
+                    }else{
+                        this.yf = yfArray[2];
+                    }
+                }
+            }
+        });
+
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                'wd' : 22,
+                'yf' : "短袖"
+            },
+            methods : {
+                addwd : function(num){
+                    if(num != ''){
+                        this.wd+=num;
+                    }else{
+                        this.wd++;
+                    }
+                },
+                delwd : function(num){
+                    if(num != ''){
+                        this.wd-=num;
+                    }else{
+                        this.wd--;
+                    }
+                }
+            }
+            // watch : {
+            //     'wd' : function(newVal,oldVal){
+            //         if( newVal > 22 ){
+            //             this.yf = yfArray[0];
+            //         }else if ( newVal < 22 && newVal > 8 ){
+            //             this.yf = yfArray[1];
+            //         }else{
+            //             this.yf = yfArray[2];
+            //         }
+            //     }
+            // }
+        });
+
+        app2.$watch('wd',function(newVal,oldVal){
+            if( newVal > 22 ){
+                this.yf = yfArray[0];
+            }else if ( newVal < 22 && newVal > 8 ){
+                this.yf = yfArray[1];
+            }else{
+                this.yf = yfArray[2];
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
