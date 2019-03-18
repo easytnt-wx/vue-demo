@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mixins 混入选项操作</title>
+    <style type="text/css">
+        .f18-red{
+            color: red;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mixins 混入选项操作</h1>
+    <p>Mixins一般有两种用途：</p>
+    <ol>
+        <li>在你已经写好了构造器后，需要增加方法或者临时的活动时使用的方法，这时用混入会减少源代码的污染。</li>
+        <li>很多地方都会用到的公用方法，用混入的方法可以减少代码量，实现代码重用。</li>
+    </ol>
+    <hr>
+    <div id="app">
+        <p>从执行的先后顺序来说，都是 <span class="f18-red">混入</span>的先执行，然后<span class="f18-red">构造器里</span>的再执行，需要注意的是，这并不是方法的覆盖，而是被执行了两遍。</p>
+        <p>{{count}}</p>
+        <button @click="addCount">add</button><button @click="delCount">del</button>
+    </div>
+    <hr>
+    <div id="app2">
+        <p>全局混入的执行顺序要前于 <span class="f18-red">混入</span> 和 <span class="f18-red">构造器里</span> 的方法。</p>
+        <p>从执行的先后顺序来说，都是混入的先执行，然后构造器里的再执行，需要注意的是，这并不是方法的覆盖，而是被执行了两遍。</p>
+        <p>{{count}}</p>
+        <button @click="addCount">add</button><button @click="delCount">del</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script type="text/javascript">
+        var addLog = {
+            updated : function(){
+                console.log('数据发生了变化，变化成：' + this.count);
+            }
+        }
+        var app = new Vue({
+            el : "#app",
+            data : {
+                'count' : 10
+            },
+            methods : {
+                addCount : function(){
+                    this.count++;
+                },
+                delCount : function(){
+                    this.count--;
+                }
+            },
+            updated : function(){
+                console.log("我是构造器原生的updated-----------" + this.count);
+            },
+            mixins : [addLog]
+        });
+
+        //全局API混入方式
+        Vue.mixin({
+            updated : function(){
+                console.log("我是全局被混入的");
+            }
+        })
+        var app2 = new Vue({
+            el : "#app2",
+            data : {
+                'count' : 100
+            },
+            methods : {
+                addCount : function(){
+                    this.count++;
+                },
+                delCount : function(){
+                    this.count--;
+                }
+            },
+            updated : function(){
+                console.log("我是构造器原生的updated-----------" + this.count);
+            },
+            mixins : [addLog]
+        });
+
+
+
+    </script>
+</body>
+</html>

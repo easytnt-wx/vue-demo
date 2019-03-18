@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Extends Option 扩展选项</title>
+</head>
+<body>
+    <h1>Extends Option 扩展选项</h1>
+    <p>通过外部增加对象的形式，对构造器进行扩展。</p>
+    <hr>
+
+    <div id="app">
+        <!-- <p>{{count}}</p> -->
+        <p>${count}</p>
+        <button @click="addCount">add</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script type="text/javascript">
+        var aaa = {
+            updated : function(){
+                console.log("我是被扩展出来的")
+            },
+            methods : {
+                //扩展的方法如果跟构造器里的方法名一样，则不会执行！
+                addCount : function(){
+                    console.log("我是被扩展出来的方法")
+                }
+            }
+        };
+        var app = new Vue({
+            el : "#app",
+            data : {
+                count : 1000
+            },
+            methods : {
+                addCount : function(){
+                    this.count++;
+                    console.log("我是构造器的原生方法");
+                }
+            },
+            extends : aaa,
+            delimiters : ['${','}']    //delimiters的作用就是自定义插值形式，把原来的  {{}} 替换成 ${}形式
+        })
+    </script>
+</body>
+</html>
