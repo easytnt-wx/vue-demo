@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例方法</title>
+</head>
+<body>
+    <h1>实例方法</h1>
+    <h3>$mount方法</h3>
+    <div id="app">
+        {{messages}}
+    </div>
+    <button onclick="forceUpdate()">强制实例重新渲染</button>
+    <button onclick="tick()">更新数据</button>
+	<button onclick="destroy()">销毁</button>
+
+    <script src="../js/vue.js"></script>
+    <script type="text/javascript">
+        //$mount()实例挂载方法   实例构造器扩展
+        var wangxiang = Vue.extend({
+            template : `<p>{{messages}}</p>`,
+            data : function(){
+            	return {
+            		messages : "hello , i am wangxiang~"
+            	}
+            },
+            destroyed : function(){
+            	console.log('实例已经销毁了！');
+            },
+            beforeUpdate : function(){
+                console.log("数据更新之前")
+            },
+            updated : function(){
+                console.log('数据更新之后')
+            }
+        });
+
+        var vm = new wangxiang().$mount("#app");
+
+        //$destroy()   销毁方法
+        function destroy(){
+        	vm.$destroy();
+        };
+        //$forceUpdate()    迫使 Vue 实例重新渲染。
+        function forceUpdate(){
+            vm.$forceUpdate();
+        };
+
+        //$nextTick(callback)   将回调延迟到下次 DOM 更新循环之后执行。
+        function tick(){
+            vm.messages = "update messages info";
+            vm.$nextTick(function(){
+                console.log("数据更新完我被调用了~")
+            })
+        };
+    </script>
+</body>
+</html>

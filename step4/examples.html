@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例入门-实例属性</title>
+</head>
+<body>
+    <h1>Vue和Jquery.js一起使用</h1>
+    <P>要实现jQuery跟Vue一起使用，必须在构造器挂载的时候 mounted</P>
+    <hr>
+    <div id="app">
+        <p>{{messages}}</p>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el : "#app",
+            data : {
+                "messages" : 'hello Vuejs'
+            },
+            mounted : function(){
+                $('#app').find('p').text('hello jquery version 3.2.1')
+            },
+            methods : {
+                addCount : function(){
+                    console.log('我是构造器内部的方法 ADD方法~~');
+                }
+            }
+        });
+        app.addCount();
+        console.log(app);
+    </script>
+</body>
+</html>
