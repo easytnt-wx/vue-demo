@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例方法</title>
+</head>
+<body>
+    <h1>实例方法</h1>
+    <p>实例事件就是在构造器外部写一个调用构造器内部的方法。</p>
+    <hr>
+    <div id="app">
+        <p>{{count}}</p>
+        <button @click="add">add</button><button onclick="reduce()">reduce</button><button onclick="addCount()">once</button>
+        <button onclick="off()">关闭事件</button>
+    </div>
+    <script src="../js/vue.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el : "#app",
+            data : {
+                'count' : 100
+            },
+            methods : {
+                add : function(){
+                    this.count++;
+                }
+            }
+        });
+        //$on 在构造器外部添加事件。 
+        //$on接收两个参数，第一个参数是调用时的事件名称，第二个参数是一个匿名方法。
+        app.$on('reduce',function(){
+            console.log("执行了reduce()方法");
+            this.count--;
+        });
+
+        function reduce(){
+            app.$emit('reduce');
+        };
+
+        //$once执行一次的事件   
+        //$once接收两个参数，第一个参数是调用时的事件名称，第二个参数是一个匿名方法。
+        app.$once('addCount',function(){
+            console.log("执行了1次 addCount()方法")
+            this.count+=5;
+        });
+
+        function addCount(){
+            app.$emit('addCount');
+        };
+
+        //$off关闭事件
+        //移除自定义事件监听器。
+        //如果没有提供参数，则移除所有的事件监听器
+        //如果只提供了事件，则移除该事件所有的监听器
+        //如果同时提供了事件与回调，则只移除这个回调的监听器。
+        function off(){
+            console.log('执行了 off')
+            app.$off('reduce');
+        }
+
+
+    </script>
+</body>
+</html>
